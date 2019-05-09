@@ -15,6 +15,11 @@ namespace HtmlMinifier
                 IgnoreHtmlComments = true;
             }
 
+            if (args.Contains("commentsonly"))
+            {
+                CommentsOnly = true;
+            }
+
             if (args.Contains("ignorejscomments"))
             {
                 IgnoreJsComments = true;
@@ -41,6 +46,11 @@ namespace HtmlMinifier
         /// Should we ignore the JavaScript comments and not minify?
         /// </summary>
         public bool IgnoreJsComments { get; private set; }
+
+        /// <summary>
+        /// Should we only remove comments from files?
+        /// </summary>
+        public bool CommentsOnly { get; private set; }
 
         /// <summary>
         /// Should we ignore the html comments and not minify?

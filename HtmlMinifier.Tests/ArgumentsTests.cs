@@ -14,14 +14,16 @@ namespace HtmlMinifier.Tests
             argsList.Add("ignorehtmlcomments");
             argsList.Add("ignorejscomments");
             argsList.Add("ignoreknockoutcomments");
+            argsList.Add("commentsonly");
 
             // Act
-            Features disabledFeatures = new Features(argsList.ToArray());
+            Features enabledFeatures = new Features(argsList.ToArray());
 
             // Assert
-            Assert.That(disabledFeatures.IgnoreHtmlComments, Is.True);
-            Assert.That(disabledFeatures.IgnoreJsComments, Is.True);
-            Assert.That(disabledFeatures.IgnoreKnockoutComments, Is.True);
+            Assert.That(enabledFeatures.IgnoreHtmlComments, Is.True);
+            Assert.That(enabledFeatures.IgnoreJsComments, Is.True);
+            Assert.That(enabledFeatures.IgnoreKnockoutComments, Is.True);
+            Assert.That(enabledFeatures.CommentsOnly, Is.True);
         }
 
         [Test]
@@ -38,6 +40,7 @@ namespace HtmlMinifier.Tests
             Assert.That(disabledFeatures.IgnoreHtmlComments, Is.True);
             Assert.That(disabledFeatures.IgnoreJsComments, Is.False);
             Assert.That(disabledFeatures.IgnoreKnockoutComments, Is.False);
+            Assert.That(disabledFeatures.CommentsOnly, Is.False);
         }
     }
 }

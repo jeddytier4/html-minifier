@@ -246,5 +246,13 @@
             string minifiedHtml = StreamReaderExtension.MinifyHtmlCode(DataHelpers.CommentLineWithTripleSlash, noFeatures);
             Assert.That(minifiedHtml, Is.EqualTo(expectedResult));
         }
+        [Test]
+        public void CommentOnly_OnlyCommentsShouldBeRemoved()
+        {
+            List<string> args = new List<string> { "commentsonly" };
+            string expectedResult = DataHelpers.CommentsOnlyExpectedResult;
+            string minifiedHtml = StreamReaderExtension.MinifyHtmlCode(DataHelpers.CommentsOnly, new Features(args.ToArray()));
+            Assert.That(minifiedHtml, Is.EqualTo(expectedResult));
+        }
     }
 }

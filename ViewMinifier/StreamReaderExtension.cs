@@ -148,9 +148,6 @@ namespace HtmlMinifier
             // Remove special keys
             htmlContents = htmlContents.Replace("/*", "{{{SLASH_STAR}}}");
 
-            // Minify the string
-            htmlContents = Regex.Replace(htmlContents, @"/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/", "");
-
             // ReplaceTextLine
             htmlContents = ReplaceTextLine(htmlContents);
 
@@ -160,15 +157,6 @@ namespace HtmlMinifier
             // Replace line comments
             htmlContents = Regex.Replace(htmlContents, @"// (.*?)\r?\n", "", RegexOptions.Singleline);
 
-            // Replace spaces between quotes
-            htmlContents = Regex.Replace(htmlContents, @"\s+", " ");
-
-            // Replace line breaks
-            htmlContents = Regex.Replace(htmlContents, @"\s*\n\s*", "\n");
-
-            // Replace spaces between brackets
-            htmlContents = Regex.Replace(htmlContents, @"\s*\>\s*\<\s*", "><");
-            
             // Replace comments
             if (!features.IgnoreHtmlComments)
             {
@@ -181,6 +169,25 @@ namespace HtmlMinifier
                     htmlContents = Regex.Replace(htmlContents, @"<!--(?!(\[|\s*#include))(.*?)-->", "");
                 }
             }
+
+            if (features.CommentsOnly)
+            {
+                // Put back special keys
+                htmlContents = htmlContents.Replace("{{{SLASH_STAR}}}", "/*");
+                return htmlContents;
+            }
+
+            // Replace spaces between quotes
+            htmlContents = Regex.Replace(htmlContents, @"\s+", " ");
+
+            // Replace line breaks
+            htmlContents = Regex.Replace(htmlContents, @"\s*\n\s*", "\n");
+
+            // Replace spaces between brackets
+            htmlContents = Regex.Replace(htmlContents, @"\s*\>\s*\<\s*", "><");
+
+            // Minify the string
+            htmlContents = Regex.Replace(htmlContents, @"/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/", "");
 
             // single-line doctype must be preserved
             var firstEndBracketPosition = htmlContents.IndexOf(">", StringComparison.Ordinal);

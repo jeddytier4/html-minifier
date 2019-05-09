@@ -98,5 +98,11 @@ namespace HtmlMinifier.Tests
             ;
 
         public static string CommentLineWithTripleSlashExpectedResult = "<div class=\"vertically-centered-big mb8\">\" <p class=\"font-default-plus semi-bold color-yellow8\">\" GroupName\" </p>\" </div>\"";
+        public static string CommentsOnly =
+                "<div class=\"vertically-centered-big mb8\">\"            <p class=\"font-default-plus semi-bold color-yellow8\">\"                GroupName\"            </p>\"        </div>\"        /// this is comment\"                <dl class=\"cf border-bottom-grey2 vertically-centered-big m0\">\"                    <dtclass=\"w50 fl color-grey5\">\"                        <span class=\"one-line-overflow\">@item.Name</span></dt>\"                    <dd class=\"w50 fl m0 color-grey6 semi-bold\"><span class=\"pl4 one-line-overflow\">@item.Value</span></dd>\"                </dl>\"        </div>"
+            ;
+        public static string CommentsOnlyExpectedResult = 
+                "<div class=\"vertically-centered-big mb8\">\"            <p class=\"font-default-plus semi-bold color-yellow8\">\"                GroupName\"            </p>\"        </div>\"        "
+            ;
     }
 }
